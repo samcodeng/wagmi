@@ -26,6 +26,7 @@ import {
 const STORAGE_KEY = "numevia:xrpl-wallet";
 const POLL_INTERVAL_MS = 3000;
 const POLL_TIMEOUT_MS = 3 * 60 * 1000;
+const ERROR_AUTO_HIDE_MS = 6000;
 
 interface XrplContextValue {
   address: string | undefined;
@@ -104,6 +105,13 @@ export default function XrplProvider({ children }: { children: ReactNode }) {
       stopPolling();
     };
   }, [stopPolling]);
+
+  // Auto-hide errors after a few seconds.
+  useEffect(() => {
+    if (!error) return;
+    const timer = setTimeout(() => setError(undefined), ERROR_AUTO_HIDE_MS);
+    return () => clearTimeout(timer);
+  }, [error]);
 
   const connectXaman = useCallback(async () => {
     const payload = await createXamanSignIn();
