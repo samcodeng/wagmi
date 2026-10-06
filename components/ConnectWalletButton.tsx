@@ -92,6 +92,12 @@ export default function ConnectWalletButton() {
             {xrplWalletId ? `${WALLET_LABEL[xrplWalletId]} · ` : "XRP · "}
             {shortenAddress(xrplAddress)}
           </span>
+          <a
+            href="#my-tickets"
+            className="px-3 py-1.5 text-xs font-semibold tracking-[0.12em] text-white uppercase lg:block hidden"
+          >
+            My Tickets
+          </a>
           <button
             type="button"
             onClick={() => disconnectXrpl()}
@@ -125,7 +131,7 @@ export default function ConnectWalletButton() {
                       setPickerOpen(false);
                       connectXrpl(wallet.id);
                     }}
-                    className="flex w-full items-center justify-between px-4 py-3 text-left text-sm text-slate-200 transition-colors hover:bg-white/5"
+                    className="flex w-full items-center justify-between px-4 py-3 text-left text-sm text-slate-200 transition-colors hover:bg-white/5 cursor-pointer"
                   >
                     <span className="font-semibold">{wallet.name}</span>
                     <span className="text-[10px] uppercase tracking-[0.12em] text-slate-400">
